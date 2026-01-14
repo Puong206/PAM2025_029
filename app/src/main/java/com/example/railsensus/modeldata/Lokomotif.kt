@@ -42,3 +42,26 @@ data class UILokomotifState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 )
+
+fun DetailLokomotif.toCreateRequest() = CreateLokoRequest(
+    nomor_seri = nomor_seri,
+    dipo_induk = dipo_induk,
+    status = status.ifEmpty { null }
+)
+
+fun Lokomotif.toDetailLokomotif = DetailLokomotif(
+    loko_id = loko_id,
+    nomor_seri = nomor_seri,
+    dipo_induk = dipo_induk,
+    status = status ?: ""
+)
+
+fun Lokomotif.toUILokomotifState(isEntryValid: Boolean = false) = UILokomotifState(
+    lokomotif = this.toDetailLokomotif(),
+    isEntryValid = isEntryValid
+)
+
+fun DetailLokomotif.isValid(): Boolean {
+    return nomor_seri.isNotEmpty() &&
+            dipo_induk.isNotEmpty()
+}
