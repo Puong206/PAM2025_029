@@ -21,3 +21,7 @@ data class UIVoteState(
     val voteDetail: DetailVote = DetailVote(),
     val isEntryValid: Boolean = false
 )
+
+fun DetailVote.toVoteRequest() = VoteRequest(
+    tipe_vote = tipe_vote
+)
