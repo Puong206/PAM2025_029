@@ -3,6 +3,7 @@ package com.example.railsensus.apiservice
 import androidx.room.Dao
 import com.example.railsensus.modeldata.ApiResponse
 import com.example.railsensus.modeldata.CreateKeretaRequest
+import com.example.railsensus.modeldata.CreateKeretaResponse
 import com.example.railsensus.modeldata.CreateLokoRequest
 import com.example.railsensus.modeldata.CreateLokoResponse
 import com.example.railsensus.modeldata.Kereta
@@ -95,7 +96,7 @@ interface ServiceApi {
     suspend fun createKereta(
         @Header("x-access-token") token: String,
         @Body request: CreateKeretaRequest
-    ): Response<CreateKeretaRequest>
+    ): Response<CreateKeretaResponse>
 
     @PUT("api/kereta/{id}")
     suspend fun updateKereta(
@@ -109,5 +110,5 @@ interface ServiceApi {
         @Path("id") kaId: Int,
         @Header("x-access-token") token: String
     ): Response<ApiResponse>
-    
+
 }
