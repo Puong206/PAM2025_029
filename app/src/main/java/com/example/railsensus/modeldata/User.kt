@@ -75,6 +75,21 @@ data class UserProfile(
     val created_at: String
 )
 
+//Kelola User
+@Serializable
+data class UserManagement(
+    val user_id: Int,
+    val username: String,
+    val email: String,
+    val role: String,
+    val created_at: String
+)
+
+@Serializable
+data class StatistikUser(
+    val total_users: Int
+)
+
 fun DetailLogin.toLoginRequest(): LoginRequest = LoginRequest(
     email = email,
     password = password
