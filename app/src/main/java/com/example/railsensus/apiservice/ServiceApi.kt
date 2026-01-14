@@ -1,6 +1,5 @@
 package com.example.railsensus.apiservice
 
-import androidx.room.Dao
 import com.example.railsensus.modeldata.ApiResponse
 import com.example.railsensus.modeldata.CreateKeretaRequest
 import com.example.railsensus.modeldata.CreateKeretaResponse
@@ -17,6 +16,7 @@ import com.example.railsensus.modeldata.RegisterResponse
 import com.example.railsensus.modeldata.Sensus
 import com.example.railsensus.modeldata.StatistikKereta
 import com.example.railsensus.modeldata.StatistikLoko
+import com.example.railsensus.modeldata.StatistikUser
 import com.example.railsensus.modeldata.UserManagement
 import com.example.railsensus.modeldata.UserProfile
 import com.example.railsensus.modeldata.VoteRequest
@@ -38,7 +38,7 @@ interface ServiceApi {
 
     @GET("api/auth/me")
     suspend fun getProfile(
-        @Header("x-acces-token") token: String
+        @Header("x-access-token") token: String
     ): Response<UserProfile>
 
     //Lokomotif
@@ -56,7 +56,7 @@ interface ServiceApi {
         @Query("q") query: String
     ): Response<List<Lokomotif>>
 
-    @GET("api/lokomotif/statistik")
+    @GET("api/lokomotif/statistics")
     suspend fun getLokoStatistik():
             Response<StatistikLoko>
 
@@ -94,7 +94,7 @@ interface ServiceApi {
         @Query("q") query: String
     ): Response<List<Kereta>>
 
-    @GET("api/kereta/statistik")
+    @GET("api/kereta/statistics")
     suspend fun getKeretaStatistik():
             Response<StatistikKereta>
 
@@ -165,19 +165,19 @@ interface ServiceApi {
     //Kelola User
     @GET("api/users")
     suspend fun getAllUsers(
-        @Header("x-access-token") token: String,
+        @Header("x-access-token") token: String
     ): Response<List<UserManagement>>
 
-    @GET("api/users/statistik")
+    @GET("api/users/statistics")
     suspend fun getUserStatistik(
         @Header("x-access-token") token: String
-    ): Response<UserManagement>
+    ): Response<StatistikUser>
 
     @GET("api/users/{id}")
     suspend fun getUserById(
         @Path("id") userId: Int,
         @Header("x-access-token") token: String
-    ): Response<ApiResponse>
+    ): Response<UserManagement>
 
     @DELETE("api/users/{id}")
     suspend fun deleteUser(
