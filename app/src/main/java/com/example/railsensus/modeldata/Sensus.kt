@@ -30,3 +30,18 @@ data class CreateSensusResponse(
     val message: String,
     val sensus_id: Int
 )
+
+data class DetailSensus(
+    val sensus_id: Int = 0,
+    val loko_id: Int = 0,
+    val ka_id: Int = 0,
+    val nomor_seri: String = "",
+    val nama_ka: String = ""
+)
+
+data class UISensusState(
+    val sensusDetail: DetailSensus = DetailSensus(),
+    val isEntryValid: Boolean = false,
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null
+)
