@@ -49,7 +49,7 @@ fun DetailLokomotif.toCreateRequest() = CreateLokoRequest(
     status = status.ifEmpty { null }
 )
 
-fun Lokomotif.toDetailLokomotif = DetailLokomotif(
+fun Lokomotif.toDetailLokomotif() = DetailLokomotif(
     loko_id = loko_id,
     nomor_seri = nomor_seri,
     dipo_induk = dipo_induk,
