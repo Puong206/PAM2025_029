@@ -64,3 +64,13 @@ data class UIRegisterState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 )
+
+//Profile
+@Serializable
+data class UserProfile(
+    val id: Int,
+    val username: String,
+    val email: String,
+    val role: String,
+    val created_at: String
+)
