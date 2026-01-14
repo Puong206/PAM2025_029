@@ -11,3 +11,13 @@ data class VoteResponse(
     val message: String,
     val trust_score: Int
 )
+
+data class DetailVote(
+    val sensus_id: Int = 0,
+    val tipe_vote: String = ""
+)
+
+data class UIVoteState(
+    val voteDetail: DetailVote = DetailVote(),
+    val isEntryValid: Boolean = false
+)
