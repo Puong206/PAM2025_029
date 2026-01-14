@@ -86,3 +86,8 @@ fun DetailRegister.toRegisterRequest(): RegisterRequest = RegisterRequest(
     password = password,
     role = "User"
 )
+
+//Validasi
+fun DetailLogin.isValid(): Boolean {
+    return email.isNotEmpty() && password.isNotEmpty()
+}
