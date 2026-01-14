@@ -74,3 +74,8 @@ data class UserProfile(
     val role: String,
     val created_at: String
 )
+
+fun DetailLogin.toLoginRequest(): LoginRequest = LoginRequest(
+    email = email,
+    password = password
+)
