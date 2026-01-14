@@ -39,3 +39,7 @@ data class UIKeretaState(
     val errorMessage: String? = null
 )
 
+fun DetailKereta.toCreateRequest() = CreateKeretaRequest(
+    nama_ka = nama_ka,
+    no_ka = no_ka,
+)
