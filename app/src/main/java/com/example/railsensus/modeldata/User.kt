@@ -50,3 +50,17 @@ data class UserData(
     val email: String,
     val role: String
 )
+
+data class DetailRegister(
+    val username: String = "",
+    val email: String = "",
+    val password: String = "",
+    val confirmPassowrd: String = ""
+)
+
+data class UIRegisterState(
+    val registerData: DetailRegister = DetailRegister(),
+    val isEntryValid: Boolean = false,
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null
+)
