@@ -13,3 +13,15 @@ data class Kereta(
 data class StatistikKereta(
     val total: Int
 )
+
+//Create / Update
+data class CreateKeretaRequest(
+    val nama_ka: String,
+    val no_ka: String,
+)
+
+@Serializable
+data class CreateKeretaResponse(
+    val message: String,
+    val ka_id: Int
+)
