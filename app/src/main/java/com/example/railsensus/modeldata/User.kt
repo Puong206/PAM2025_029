@@ -16,3 +16,14 @@ data class LoginResponse(
     val accessToken: String
 )
 
+data class DetailLogin(
+    val email: String = "",
+    val password: String = ""
+)
+
+data class UILoginState(
+    val loginData: DetailLogin = DetailLogin(),
+    val isEntryValid: Boolean = false,
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null
+)
