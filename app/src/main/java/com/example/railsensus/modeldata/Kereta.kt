@@ -43,3 +43,9 @@ fun DetailKereta.toCreateRequest() = CreateKeretaRequest(
     nama_ka = nama_ka,
     no_ka = no_ka,
 )
+
+fun Kereta.toDetailKereta() = DetailKereta(
+    ka_id = ka_id,
+    nama_ka = nama_ka,
+    no_ka = no_ka
+)
