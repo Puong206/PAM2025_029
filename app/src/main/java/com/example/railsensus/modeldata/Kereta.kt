@@ -25,3 +25,17 @@ data class CreateKeretaResponse(
     val message: String,
     val ka_id: Int
 )
+
+data class DetailKereta(
+    val ka_id: Int = 0,
+    val nama_ka: String = "",
+    val no_ka: String = "",
+)
+
+data class UIKeretaState(
+    val keretaDetail: DetailKereta = DetailKereta(),
+    val isEntryValid: Boolean = false,
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null
+)
+
