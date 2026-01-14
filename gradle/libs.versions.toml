@@ -35,6 +35,8 @@ lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose",version = "2.10.0" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.9.6" }
 androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayout" }
+retrofit2 = { module = "com.squareup.retrofit2:retrofit", version = "3.0.0" }
+retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version = "3.0.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

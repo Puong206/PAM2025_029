@@ -60,6 +60,9 @@ dependencies {
     implementation(libs.lifecycle.runtime.compose)
     // Navigasi
     implementation(libs.navigation.compose)
+    //Retrofit untuk API
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.converter.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
