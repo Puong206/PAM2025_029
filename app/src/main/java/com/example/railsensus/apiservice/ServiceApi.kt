@@ -138,4 +138,10 @@ interface ServiceApi {
         @Header("x-access-token") token: String,
         @Body request: CreateSensusRequest
     ): Response<ApiResponse>
+
+    @DELETE("api/sensus/{id}")
+    suspend fun deleteSensus(
+        @Path("id") sensusId: Int,
+        @Header("x-access-token") token: String
+    ): Response<ApiResponse>
 }
