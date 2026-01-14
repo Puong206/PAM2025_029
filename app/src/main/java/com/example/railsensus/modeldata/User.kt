@@ -95,6 +95,6 @@ fun DetailLogin.isValid(): Boolean {
 fun DetailRegister.isValid(): Boolean {
     return username.isNotEmpty() &&
             email.isNotEmpty() &&
-            password.isNotEmpty() && 
+            password.isNotEmpty() &&
             password == confirmPassowrd
 }
