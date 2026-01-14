@@ -45,3 +45,27 @@ data class UISensusState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 )
+
+fun DetailSensus.toCreateRequest() = CreateSensusRequest(
+    loko_id = loko_id,
+    ka_id = ka_id
+)
+
+fun Sensus.toDetailSensus() = DetailSensus(
+    sensus_id = sensus_id,
+    loko_id = loko_id,
+    ka_id = ka_id,
+    nomor_seri = nomor_seri ?: "",
+    nama_ka = nama_ka ?: ""
+)
+
+fun Sensus.toUISensusState(isEntryValid: Boolean = false) =
+    UISensusState(
+        sensusDetail = this.toDetailSensus(),
+        isEntryValid = isEntryValid
+)
+
+fun DetailSensus.isValid(): Boolean {
+    return loko_id != 0 &&
+            ka_id != 0
+}
