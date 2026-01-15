@@ -130,4 +130,41 @@ class LoginViewModel (
         }
         validateRegister()
     }
+
+    fun register() {
+        val registerData = _registerState.value.registerData
+        if (!registerData.isValid()) {
+            _registerState.update { it.copy(
+                errorMessage = "Semua field harus diisi dan password harus sama"
+            )}
+            return
+        }
+
+        viewModelScope.launch {
+            _registerState.update { it.copy(
+                isLoading = true,
+                errorMessage = null
+            )}
+
+            when (val result = repository.register(
+                username = registerData.username,
+                email = registerData.email,
+                password = registerData.password
+            )) {
+                is ApiResult.Success -> {
+                    _registerState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = null
+                    ) }
+                }
+                is ApiResult.Error -> {
+                    _registerState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = result.message
+                    )}
+                }
+                is ApiResult.Loading -> { }
+            }
+        }
+    }
 }
