@@ -179,4 +179,13 @@ class LoginViewModel (
         _loginState.value = UILoginState()
         _registerState.value = UIRegisterState()
     }
+
+    //Auth Check
+    fun isLoggedIn(): Boolean {
+        return _currentToken.value != null
+    }
+
+    fun isAdmin(): Boolean {
+        return _currentUser.value?.role == "Admin"
+    }
 }
