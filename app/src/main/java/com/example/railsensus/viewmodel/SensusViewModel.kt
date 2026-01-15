@@ -143,4 +143,41 @@ class SensusViewModel(
             }
         }
     }
+
+    //update
+    fun updateSensus(token: String, id: Int) {
+        val formData = _sensusFormState.value.sensusDetail
+
+        if (!formData.isValid()) {
+            _sensusFormState.update { it.copy(
+                errorMessage = "Lokomotif dan Kereta harus dipilih"
+            )}
+            return
+        }
+
+        viewModelScope.launch {
+            _sensusFormState.update { it.copy(isLoading = true) }
+
+            val request = formData.toCreateRequest()
+
+            when (val result = repositori.updateSensus(token, id, request)) {
+                is ApiResult.Success -> {
+                    _sensusFormState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = null
+                    )}
+
+                    resetForm()
+                    loadAllSensus()
+                }
+                is ApiResult.Error -> {
+                    _sensusFormState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = result.message
+                    )}
+                }
+                is ApiResult.Loading -> { }
+            }
+        }
+    }
 }
