@@ -36,5 +36,9 @@ class LoginViewModel (
         _loginState.update { it.copy(isEntryValid = isValid) }
     }
 
+    fun updateLoginEmail(email: String) {
+        _loginState.update { it.copy(loginData = it.loginData.copy(email = email)) }
+        validateLogin()
+    }
 
 }
