@@ -92,4 +92,8 @@ class LoginViewModel (
             }
         }
     }
+
+    fun clearLoginError() {
+        _loginState.update { it.copy(errorMessage = null) }
+    }
 }
