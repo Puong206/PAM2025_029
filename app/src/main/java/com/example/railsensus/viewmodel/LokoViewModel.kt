@@ -172,6 +172,41 @@ class LokoViewModel(
             }
         }
     }
+
+    //update
+    fun updateLoko(token: String, id: Int) {
+        val formData = _lokoFormState.value.lokomotif
+
+        if (!formData.isValid()) {
+            _lokoFormState.update { it.copy(
+                errorMessage = "Nomor Seri dan Dipo Induk harus diisi"
+            )}
+            return
+        }
+
+        viewModelScope.launch {
+            _lokoFormState.update { it.copy(isLoading = true) }
+            val request = formData.toCreateRequest()
+            when (val result = repositori.updateLoko(token, id, request)) {
+                is ApiResult.Success -> {
+                    _lokoFormState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = null
+                    )}
+
+                    resetForm()
+                    loadAllLoko()
+                }
+                is ApiResult.Error -> {
+                    _lokoFormState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = result.message
+                    )}
+                }
+                is ApiResult.Loading -> { }
+            }
+        }
+    }
 }
 
 
