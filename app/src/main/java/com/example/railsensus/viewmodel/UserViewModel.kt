@@ -84,4 +84,21 @@ class UserViewModel(
             }
         }
     }
+
+    //delete
+    fun deleteUser(token: String, id: Int) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            when (val result = repositori.deleteUser(token, id)) {
+                is ApiResult.Success -> {
+                    loadAllUsers(token)
+                }
+                is ApiResult.Error -> {
+                    _errorMessage.value = result.message
+                }
+                is ApiResult.Loading -> { }
+            }
+            _isLoading.value = false
+        }
+    }
 }
