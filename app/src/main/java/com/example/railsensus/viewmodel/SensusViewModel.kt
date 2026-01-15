@@ -7,6 +7,7 @@ import com.example.railsensus.repositori.RepositoriRailSensus
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class SensusViewModel(
     private val repositori: RepositoriRailSensus
@@ -37,4 +38,15 @@ class SensusViewModel(
     // Vote loading (separate from main loading)
     private val _isVoting = MutableStateFlow(false)
     val isVoting: StateFlow<Boolean> = _isVoting.asStateFlow()
+
+    //helper
+    fun resetForm() {
+        _sensusFormState.value = UISensusState()
+        _selectedSensus.value = null
+    }
+
+    fun clearError() {
+        _errorMessage.value = null
+        _sensusFormState.update { it.copy(errorMessage = null) }
+    }
 }
