@@ -58,4 +58,21 @@ class LokoViewModel(
             }
         }
     }
+
+    //load by id
+    fun loadLokoById(id: Int) {
+        viewModelScope.launch {
+            _isLoading.value = true
+
+            when (val result = repositori.getLokoById(id)) {
+                is ApiResult.Success -> {
+                    _selectedLoko.value = result.data
+                }
+                is ApiResult.Error -> {
+                    _errorMessage.value = result.message
+                }
+                is ApiResult.Loading -> { }
+            }
+        }
+    }
 }
