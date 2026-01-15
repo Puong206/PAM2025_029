@@ -199,4 +199,21 @@ class KeretaViewModel(
             }
         }
     }
+
+    //delete
+    fun deleteKereta(token: String, id: Int) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            when (val result = repositori.deleteKereta(token, id)) {
+                is ApiResult.Success -> {
+                    loadAllKereta()
+                }
+                is ApiResult.Error -> {
+                    _errorMessage.value = result.message
+                }
+                is ApiResult.Loading -> { }
+            }
+            _isLoading.value = false
+        }
+    }
 }
