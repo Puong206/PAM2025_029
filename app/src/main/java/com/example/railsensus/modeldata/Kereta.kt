@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class Kereta(
     val ka_id: Int,
     val nama_ka: String,
-    val no_ka: String,
+    val nomor_ka: String  // ← Changed from no_ka
 )
 
 @Serializable
@@ -17,7 +17,7 @@ data class StatistikKereta(
 //Create / Update
 data class CreateKeretaRequest(
     val nama_ka: String,
-    val no_ka: String,
+    val nomor_ka: String  // ← Changed from no_ka
 )
 
 @Serializable
@@ -29,7 +29,7 @@ data class CreateKeretaResponse(
 data class DetailKereta(
     val ka_id: Int = 0,
     val nama_ka: String = "",
-    val no_ka: String = "",
+    val nomor_ka: String = ""  // ← Changed from no_ka
 )
 
 data class UIKeretaState(
@@ -41,16 +41,20 @@ data class UIKeretaState(
 
 fun DetailKereta.toCreateRequest() = CreateKeretaRequest(
     nama_ka = nama_ka,
-    no_ka = no_ka,
+    nomor_ka = nomor_ka
 )
 
 fun Kereta.toDetailKereta() = DetailKereta(
     ka_id = ka_id,
     nama_ka = nama_ka,
-    no_ka = no_ka
+    nomor_ka = nomor_ka
 )
 
 fun Kereta.toUIKeretaState(isEntryValid: Boolean = false) = UIKeretaState(
     keretaDetail = this.toDetailKereta(),
     isEntryValid = isEntryValid
 )
+
+fun DetailKereta.isValid(): Boolean {
+    return nama_ka.isNotBlank() && nomor_ka.isNotBlank()
+}
