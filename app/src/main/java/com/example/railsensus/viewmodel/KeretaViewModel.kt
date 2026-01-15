@@ -107,6 +107,11 @@ class KeretaViewModel(
     }
 
     //kelola form
+    private fun validateForm() {
+        val isValid = _keretaFormState.value.keretaDetail.isValid()
+        _keretaFormState.update { it.copy(isEntryValid = isValid) }
+    }
+
     fun updateNamaKa(value: String) {
         _keretaFormState.update { it.copy(
             keretaDetail = it.keretaDetail.copy(nama_ka = value)
@@ -119,11 +124,6 @@ class KeretaViewModel(
             keretaDetail = it.keretaDetail.copy(nomor_ka = value)
         )}
         validateForm()
-    }
-
-    private fun validateForm() {
-        val isValid = _keretaFormState.value.keretaDetail.isValid()
-        _keretaFormState.update { it.copy(isEntryValid = isValid) }
     }
     
     //create
@@ -143,6 +143,43 @@ class KeretaViewModel(
             val request = formData.toCreateRequest()
 
             when (val result = repositori.createKereta(token, request)) {
+                is ApiResult.Success -> {
+                    _keretaFormState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = null
+                    )}
+
+                    resetForm()
+                    loadAllKereta()
+                }
+                is ApiResult.Error -> {
+                    _keretaFormState.update { it.copy(
+                        isLoading = false,
+                        errorMessage = result.message
+                    )}
+                }
+                is ApiResult.Loading -> { }
+            }
+        }
+    }
+
+    //update
+    fun updateKereta(token: String, id: Int) {
+        val formData = _keretaFormState.value.keretaDetail
+
+        if (!formData.isValid()) {
+            _keretaFormState.update { it.copy(
+                errorMessage = "Nama kereta harus diisi"
+            )}
+            return
+        }
+
+        viewModelScope.launch {
+            _keretaFormState.update { it.copy(isLoading = true) }
+
+            val request = formData.toCreateRequest()
+
+            when (val result = repositori.updateKereta(token, id, request)) {
                 is ApiResult.Success -> {
                     _keretaFormState.update { it.copy(
                         isLoading = false,
