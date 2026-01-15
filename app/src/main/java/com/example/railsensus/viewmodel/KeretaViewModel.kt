@@ -2,11 +2,7 @@ package com.example.railsensus.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.railsensus.modeldata.DetailKereta
-import com.example.railsensus.modeldata.Kereta
-import com.example.railsensus.modeldata.StatistikKereta
-import com.example.railsensus.modeldata.UIKeretaState
-import com.example.railsensus.modeldata.toCreateRequest
+import com.example.railsensus.modeldata.*
 import com.example.railsensus.repositori.ApiResult
 import com.example.railsensus.repositori.RepositoriRailSensus
 import kotlinx.coroutines.flow.MutableStateFlow
