@@ -75,4 +75,27 @@ class LokoViewModel(
             }
         }
     }
+
+    //search
+    fun searchLoko(query: String) {
+        if (query.isBlank()) {
+            loadAllLoko()
+            return
+        }
+
+        viewModelScope.launch {
+            _isLoading.value = true
+
+            when (val result = repositori.searchLoko(query)) {
+                is ApiResult.Success -> {
+                    _lokoList.value = result.data
+                }
+                is ApiResult.Error -> {
+                    _errorMessage.value = result.message
+                }
+                is ApiResult.Loading -> { }
+            }
+            _isLoading.value = false
+        }
+    }
 }
