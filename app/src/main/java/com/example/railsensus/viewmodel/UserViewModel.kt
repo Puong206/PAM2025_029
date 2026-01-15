@@ -52,4 +52,21 @@ class UserViewModel(
             _isLoading.value = false
         }
     }
+
+    //user by id
+    fun loadUserById(token: String, id: Int) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            when (val result = repositori.getUserById(token, id)) {
+                is ApiResult.Success -> {
+                    _selectedUser.value = result.data
+                }
+                is ApiResult.Error -> {
+                    _errorMessage.value = result.message
+                }
+                is ApiResult.Loading -> { }
+            }
+            _isLoading.value = false
+        }
+    }
 }
