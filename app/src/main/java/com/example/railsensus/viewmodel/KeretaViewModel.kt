@@ -216,4 +216,23 @@ class KeretaViewModel(
             _isLoading.value = false
         }
     }
+
+    //helper
+    fun setSelectedKereta(kereta: Kereta?) {
+        _selectedKereta.value = kereta
+
+        if (kereta != null) {
+            _keretaFormState.value = kereta.toUIKeretaState(isEntryValid = true)
+        }
+    }
+
+    fun resetForm() {
+        _keretaFormState.value = UIKeretaState()
+        _selectedKereta.value = null
+    }
+
+    fun clearError() {
+        _errorMessage.value = null
+        _keretaFormState.update { it.copy(errorMessage = null) }
+    }
 }
