@@ -3,6 +3,7 @@ package com.example.railsensus.repositori
 import com.example.railsensus.apiservice.ServiceApi
 import com.example.railsensus.modeldata.CreateKeretaRequest
 import com.example.railsensus.modeldata.CreateLokoRequest
+import com.example.railsensus.modeldata.CreateSensusRequest
 import com.example.railsensus.modeldata.LoginRequest
 import com.example.railsensus.modeldata.RegisterRequest
 
@@ -78,6 +79,27 @@ class RepositoriRailSensus(
     }
 
     suspend fun deleteKereta(token: String, id: Int) = safeApiCall {
+        serviceApi.deleteKereta(id, token)
+    }
+    
+    //Sensus
+    suspend fun getAllSensus(page: Int = 1, limit: Int = 20) = safeApiCall { 
+        serviceApi.getAllSensus(page, limit)
+    }
+    
+    suspend fun getSensusById(id: Int) = safeApiCall { 
+        serviceApi.getSensusById(id)
+    }
+    
+    suspend fun createSensus(token: String, data: CreateSensusRequest) = safeApiCall { 
+        serviceApi.createSensus(token, data)
+    }
+    
+    suspend fun updateSensus(token: String, id: Int, data: CreateSensusRequest) = safeApiCall { 
+        serviceApi.updateSensus(id, token, data)
+    }
+
+    suspend fun deleteSensus(token: String, id: Int) =  safeApiCall {
         serviceApi.deleteKereta(id, token)
     }
 }
