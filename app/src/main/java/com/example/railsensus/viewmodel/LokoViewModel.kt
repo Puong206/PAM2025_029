@@ -98,4 +98,19 @@ class LokoViewModel(
             _isLoading.value = false
         }
     }
+
+    //statistik
+    fun loadStatistik() {
+        viewModelScope.launch {
+            when (val result = repositori.getLokoStatistik()) {
+                is ApiResult.Success -> {
+                    _statistik.value = result.data
+                }
+                is ApiResult.Error -> {
+                    _errorMessage.value = result.message
+                }
+                is ApiResult.Loading -> { }
+            }
+        }
+    }
 }
