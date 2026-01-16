@@ -1,4 +1,4 @@
-package com.example.railsensus.view.user
+package com.example.railsensus.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
