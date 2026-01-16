@@ -56,7 +56,7 @@ fun RegisterPage(
     LaunchedEffect(registerState.errorMessage == null &&
     !registerState.isLoading) {
         if (viewModel.isLoggedIn()) {
-            onRegisterSuccess
+            onRegisterSuccess()
         }
     }
 
