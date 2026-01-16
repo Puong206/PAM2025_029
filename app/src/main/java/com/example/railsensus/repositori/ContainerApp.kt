@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
 interface AppContainer{
-    val serviceApi: ServiceApi
+    val repositoriRailSensus: RepositoriRailSensus
 }
 
 class ContainerApp: AppContainer{
@@ -43,11 +43,11 @@ class ContainerApp: AppContainer{
             .build()
     }
 
-    override val serviceApi: ServiceApi by lazy {
+    private val serviceApi: ServiceApi by lazy {
         retrofit.create(ServiceApi::class.java)
     }
 
-    val repositoriRailSensus: RepositoriRailSensus by lazy {
+    override val repositoriRailSensus: RepositoriRailSensus by lazy {
         RepositoriRailSensus(serviceApi)
     }
 }
