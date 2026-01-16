@@ -1,4 +1,4 @@
-package com.example.railsensus.view.user
+package com.example.railsensus.view.sensus
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,10 +20,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.railsensus.R
 import com.example.railsensus.modeldata.Sensus
 import com.example.railsensus.ui.component.RailSensusLogo
 import com.example.railsensus.ui.component.RailSensusTheme
+import com.example.railsensus.view.user.RailSensusBottomNavigation
 import com.example.railsensus.view.user.dialog.TambahSensusDialog
 import com.example.railsensus.viewmodel.LoginViewModel
 import com.example.railsensus.viewmodel.SensusViewModel
