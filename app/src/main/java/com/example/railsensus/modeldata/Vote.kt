@@ -2,6 +2,7 @@ package com.example.railsensus.modeldata
 
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class VoteRequest(
     val tipe_vote: String
 )

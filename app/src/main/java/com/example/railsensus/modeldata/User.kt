@@ -3,6 +3,7 @@ package com.example.railsensus.modeldata
 import kotlinx.serialization.Serializable
 
 //Login
+@Serializable
 data class LoginRequest(
     val email: String,
     val password: String
@@ -30,6 +31,7 @@ data class UILoginState(
 )
 
 //Register
+@Serializable
 data class RegisterRequest(
     val username: String,
     val email: String,
