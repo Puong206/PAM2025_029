@@ -119,6 +119,12 @@ fun RailSensusNavigation(
                 onUserManagementClick = {
                     navController.navigate(RailSensusScreen.UserPage.route)
                 },
+                onKeretaManagementClick = {
+                    navController.navigate(RailSensusScreen.KeretaPage.route)
+                },
+                onSeeAllClick = {
+                    navController.navigate(RailSensusScreen.SensusPage.route)
+                },
                 onBottomNavClick = { index ->
                     handleBottomNavigation(navController, index)
                 },
