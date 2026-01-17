@@ -40,8 +40,8 @@ fun DashboardPage(
     onSeeAllClick: () -> Unit = {},
     onBottomNavClick: (Int) -> Unit = {},
     onUserManagementClick: () -> Unit = {},
-    loginViewModel: LoginViewModel = viewModel(factory = RailSensusViewModel.Factory),
-    sensusViewModel: SensusViewModel = viewModel(factory = RailSensusViewModel.Factory)
+    sensusViewModel: SensusViewModel = viewModel(factory = RailSensusViewModel.Factory),
+    loginViewModel: LoginViewModel = viewModel(factory = RailSensusViewModel.Factory)
 ) {
     val currentUser by loginViewModel.currentUser.collectAsState()
     val isAdmin = loginViewModel.isAdmin()
