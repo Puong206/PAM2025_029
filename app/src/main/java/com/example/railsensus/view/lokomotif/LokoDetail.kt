@@ -388,6 +388,119 @@ fun LokoDetailPage(
             }
         )
     }
+    
+    // Edit Loko Dialog
+    if (showEditDialog && selectedLoko != null) {
+        var editNomorSeri by remember { mutableStateOf(selectedLoko?.nomor_seri ?: "") }
+        var editDipoInduk by remember { mutableStateOf(selectedLoko?.dipo_induk ?: "") }
+        var editStatus by remember { mutableStateOf(selectedLoko?.status ?: "") }
+        
+        AlertDialog(
+            onDismissRequest = { showEditDialog = false },
+            title = {
+                Text(
+                    text = "Edit Lokomotif",
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        color = RailSensusTheme.blueColor,
+                        fontFamily = RailSensusTheme.orangeFontFamily,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            },
+            text = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    OutlinedTextField(
+                        value = editNomorSeri,
+                        onValueChange = { editNomorSeri = it },
+                        label = { Text("Nomor Seri") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = RailSensusTheme.blueColor,
+                            focusedLabelColor = RailSensusTheme.blueColor,
+                            cursorColor = RailSensusTheme.blueColor
+                        )
+                    )
+                    
+                    OutlinedTextField(
+                        value = editDipoInduk,
+                        onValueChange = { editDipoInduk = it },
+                        label = { Text("Dipo Induk") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = RailSensusTheme.blueColor,
+                            focusedLabelColor = RailSensusTheme.blueColor,
+                            cursorColor = RailSensusTheme.blueColor
+                        )
+                    )
+                    
+                    OutlinedTextField(
+                        value = editStatus,
+                        onValueChange = { editStatus = it },
+                        label = { Text("Status (Opsional)") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = RailSensusTheme.blueColor,
+                            focusedLabelColor = RailSensusTheme.blueColor,
+                            cursorColor = RailSensusTheme.blueColor
+                        )
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        val currentToken = loginViewModel.currentToken.value
+                        if (currentToken != null && editNomorSeri.isNotEmpty() && editDipoInduk.isNotEmpty()) {
+                            lokoViewModel.updateLoko(
+                                token = currentToken,
+                                lokoId = lokoId,
+                                nomorSeri = editNomorSeri,
+                                dipoInduk = editDipoInduk,
+                                status = editStatus.ifEmpty { null }
+                            )
+                            showEditDialog = false
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = RailSensusTheme.blueColor
+                    ),
+                    shape = RoundedCornerShape(8.dp),
+                    enabled = editNomorSeri.isNotEmpty() && editDipoInduk.isNotEmpty()
+                ) {
+                    Text(
+                        text = "Simpan",
+                        style = TextStyle(
+                            fontFamily = RailSensusTheme.blueFontFamily,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    )
+                }
+            },
+            dismissButton = {
+                OutlinedButton(
+                    onClick = { showEditDialog = false },
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = RailSensusTheme.blueColor
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text(
+                        text = "Batal",
+                        style = TextStyle(
+                            fontFamily = RailSensusTheme.blueFontFamily,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    )
+                }
+            }
+        )
+    }
 }
 
 @Composable
