@@ -199,6 +199,7 @@ class LokoViewModel(
 
                     resetForm()
                     loadAllLoko()
+                    loadLokoById(id)  // Reload detail to refresh the view
                 }
                 is ApiResult.Error -> {
                     _lokoFormState.update { it.copy(
