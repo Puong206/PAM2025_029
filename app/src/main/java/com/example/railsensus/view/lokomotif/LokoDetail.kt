@@ -457,13 +457,12 @@ fun LokoDetailPage(
                     onClick = {
                         val currentToken = loginViewModel.currentToken.value
                         if (currentToken != null && editNomorSeri.isNotEmpty() && editDipoInduk.isNotEmpty()) {
-                            lokoViewModel.updateLoko(
-                                token = currentToken,
-                                lokoId = lokoId,
-                                nomorSeri = editNomorSeri,
-                                dipoInduk = editDipoInduk,
-                                status = editStatus.ifEmpty { null }
-                            )
+                            // Update form state using individual methods
+                            lokoViewModel.updateNomorSeri(editNomorSeri)
+                            lokoViewModel.updateDipoInduk(editDipoInduk)
+                            lokoViewModel.updateStatus(editStatus)
+                            // Then call update
+                            lokoViewModel.updateLoko(currentToken, lokoId)
                             showEditDialog = false
                         }
                     },
