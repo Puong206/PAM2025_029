@@ -40,6 +40,7 @@ fun DashboardPage(
     onSeeAllClick: () -> Unit = {},
     onBottomNavClick: (Int) -> Unit = {},
     onUserManagementClick: () -> Unit = {},
+    onKeretaManagementClick: () -> Unit = {},
     sensusViewModel: SensusViewModel = viewModel(factory = RailSensusViewModel.Factory),
     loginViewModel: LoginViewModel = viewModel(factory = RailSensusViewModel.Factory)
 ) {
@@ -75,11 +76,11 @@ fun DashboardPage(
                 modifier = Modifier.padding(horizontal = 24.dp)
             )
 
-            //Admin
             if (isAdmin) {
                 Spacer(modifier = Modifier.height(12.dp))
                 AdminSection(
                     onUserManagementClick = onUserManagementClick,
+                    onKeretaManagementClick = onKeretaManagementClick,
                     modifier = Modifier.padding(horizontal = 24.dp)
                 )
             }
@@ -315,6 +316,7 @@ fun SensusTerbaruSection(
 @Composable
 fun AdminSection(
     onUserManagementClick: () -> Unit,
+    onKeretaManagementClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
@@ -328,13 +330,23 @@ fun AdminSection(
             ),
             modifier = Modifier.padding(bottom = 16.dp)
         )
-        FeatureCard(
-            icon = Icons.Default.AdminPanelSettings,
-            iconColor = Color(0xFF9C27B0),
-            iconBackground = Color(0xFF9C27B0).copy(alpha = 0.1f),
-            title = "User Management",
-            description = "Kelola User (Admin Only)",
-            onClick = onUserManagementClick
-        )
+        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            FeatureCard(
+                icon = Icons.Default.AdminPanelSettings,
+                iconColor = Color(0xFF9C27B0),
+                iconBackground = Color(0xFF9C27B0).copy(alpha = 0.1f),
+                title = "User Management",
+                description = "Kelola User (Admin Only)",
+                onClick = onUserManagementClick
+            )
+            FeatureCard(
+                icon = Icons.Default.Train,
+                iconColor = Color(0xFF1976D2),
+                iconBackground = Color(0xFF1976D2).copy(alpha = 0.1f),
+                title = "Kereta Management",
+                description = "Kelola Data Kereta (Admin Only)",
+                onClick = onKeretaManagementClick
+            )
+        }
     }
 }
