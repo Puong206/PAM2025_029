@@ -33,13 +33,15 @@ fun LokoPage(
     onAddClick: () -> Unit = {},
     onItemClick: (Int) -> Unit = {},
     onBottomNavClick: (Int) -> Unit = {},
-    lokoViewModel: LokoViewModel = viewModel(factory = RailSensusViewModel.Factory)
+    lokoViewModel: LokoViewModel = viewModel(factory = RailSensusViewModel.Factory),
+    loginViewModel: com.example.railsensus.viewmodel.LoginViewModel = viewModel(factory = RailSensusViewModel.Factory)
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
     
     val lokoList by lokoViewModel.lokoList.collectAsState()
     val isLoading by lokoViewModel.isLoading.collectAsState()
+    val currentToken by loginViewModel.currentToken.collectAsState()
     
     LaunchedEffect(Unit) {
         lokoViewModel.loadAllLoko()
@@ -238,6 +240,23 @@ fun LokoPage(
         }
     }
     
+    // Observer for form state to handle success/error
+    val formState by lokoViewModel.lokoFormState.collectAsState()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var previousLoading by remember { mutableStateOf(false) }
+
+    LaunchedEffect(formState.isLoading) {
+        if (previousLoading && !formState.isLoading) {
+            if (formState.errorMessage == null) {
+                showDialog = false
+                android.widget.Toast.makeText(context, "Berhasil menambah lokomotif", android.widget.Toast.LENGTH_SHORT).show()
+            } else {
+                android.widget.Toast.makeText(context, formState.errorMessage, android.widget.Toast.LENGTH_SHORT).show()
+            }
+        }
+        previousLoading = formState.isLoading
+    }
+
     // Show Dialog
     if (showDialog) {
         TambahLokoDialog(
@@ -248,12 +267,15 @@ fun LokoPage(
                 lokoViewModel.updateDipoInduk(lokoDetail.dipo_induk)
                 lokoViewModel.updateStatus(lokoDetail.status)
 
-                // TODO: Create via ViewModel (needs token from LoginViewModel)
-                // currentToken?.let { token ->
-                //     lokoViewModel.createLoko(token)
-                // }
-
-                showDialog = false
+                if (currentToken == null) {
+                    android.widget.Toast.makeText(context, "Anda belum login! Silakan login kembali.", android.widget.Toast.LENGTH_LONG).show()
+                } else {
+                    // Create via ViewModel with token
+                    currentToken?.let { token ->
+                        lokoViewModel.createLoko(token)
+                    }
+                }
+                // Do NOT close dialog here, wait for success
             }
         )
     }
