@@ -85,7 +85,8 @@ fun RailSensusNavigation(
                 },
                 onRegisterClick = {
                     navController.navigate(RailSensusScreen.Register.route)
-                }
+                },
+                viewModel = loginViewModel // Pass shared instance
             )
         }
         
@@ -120,7 +121,8 @@ fun RailSensusNavigation(
                 },
                 onBottomNavClick = { index ->
                     handleBottomNavigation(navController, index)
-                }
+                },
+                loginViewModel = loginViewModel // Pass shared instance
             )
         }
         
@@ -132,7 +134,8 @@ fun RailSensusNavigation(
                 },
                 onBottomNavClick = { index ->
                     handleBottomNavigation(navController, index)
-                }
+                },
+                loginViewModel = loginViewModel // Pass shared instance
             )
         }
         
@@ -148,7 +151,8 @@ fun RailSensusNavigation(
                 sensusId = sensusId,
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
+                loginViewModel = loginViewModel
             )
         }
         
@@ -160,7 +164,8 @@ fun RailSensusNavigation(
                 },
                 onBottomNavClick = { index ->
                     handleBottomNavigation(navController, index)
-                }
+                },
+                loginViewModel = loginViewModel // Pass shared instance
             )
         }
         
@@ -179,7 +184,8 @@ fun RailSensusNavigation(
                 },
                 onDeleteClick = {
                     navController.popBackStack()
-                }
+                },
+                loginViewModel = loginViewModel
             )
         }
         
@@ -191,7 +197,8 @@ fun RailSensusNavigation(
                 },
                 onBottomNavClick = { index ->
                     handleBottomNavigation(navController, index)
-                }
+                },
+                loginViewModel = loginViewModel // Pass shared instance
             )
         }
         
@@ -210,7 +217,8 @@ fun RailSensusNavigation(
                 },
                 onDeleteClick = {
                     navController.popBackStack()
-                }
+                },
+                loginViewModel = loginViewModel
             )
         }
         
@@ -221,7 +229,8 @@ fun RailSensusNavigation(
                 },
                 onBottomNavClick = { index ->
                     handleBottomNavigation(navController, index)
-                }
+                },
+                loginViewModel = loginViewModel // Pass shared instance
             )
         }
     }
