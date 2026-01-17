@@ -222,15 +222,19 @@ fun RailSensusNavigation(
             )
         }
         
+        
         // User Page
         composable(route = RailSensusScreen.UserPage.route) {
             UserPage(
-                onItemClick = { userId ->
-                },
                 onBottomNavClick = { index ->
                     handleBottomNavigation(navController, index)
                 },
-                loginViewModel = loginViewModel // Pass shared instance
+                onLogout = {
+                    navController.navigate(RailSensusScreen.Login.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                },
+                loginViewModel = loginViewModel
             )
         }
     }
